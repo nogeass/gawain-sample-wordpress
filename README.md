@@ -49,6 +49,35 @@ docker compose logs wpcli
 4. 「External processing」の同意を有効化
 5. Products タブから商品を選んで動画生成を実行
 
+## 動画生成をローカルで試す (ngrok)
+
+Gawain API は商品画像をダウンロードして処理するため、`localhost` のままでは画像にアクセスできません。
+[ngrok](https://ngrok.com/) でローカル環境を公開すると、動画生成まで一通り動作確認できます。
+
+```bash
+# ngrok をインストール (Homebrew)
+brew install ngrok
+
+# ローカルの WordPress を公開
+ngrok http 8080
+```
+
+ngrok が発行した URL (例: `https://xxxx.ngrok-free.app`) を WordPress に反映します。
+
+```bash
+# WordPress の URL を ngrok の公開 URL に変更
+docker compose run --rm wpcli wp option update siteurl 'https://xxxx.ngrok-free.app'
+docker compose run --rm wpcli wp option update home 'https://xxxx.ngrok-free.app'
+```
+
+ngrok の URL で管理画面にアクセスし、動画生成を実行できます。
+
+> **注意**: ngrok を終了したら URL を `http://localhost:8080` に戻してください。
+> ```bash
+> docker compose run --rm wpcli wp option update siteurl 'http://localhost:8080'
+> docker compose run --rm wpcli wp option update home 'http://localhost:8080'
+> ```
+
 ## Commands
 
 ```bash
