@@ -31,7 +31,7 @@ services:
       WORDPRESS_DEBUG: "1"
     volumes:
       - wp_data:/var/www/html
-      - ./plugins/gawain-ai-video:/var/www/html/wp-content/plugins/gawain-ai-video
+      - ../gawain-wordpress-plugin:/var/www/html/wp-content/plugins/gawain-ai-video
 
   wpcli:
     image: wordpress:cli
@@ -46,7 +46,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
     volumes:
       - wp_data:/var/www/html
-      - ./plugins/gawain-ai-video:/var/www/html/wp-content/plugins/gawain-ai-video
+      - ../gawain-wordpress-plugin:/var/www/html/wp-content/plugins/gawain-ai-video
       - ./setup.sh:/setup.sh
     entrypoint: /bin/sh
     command: /setup.sh

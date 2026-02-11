@@ -6,10 +6,14 @@ Docker Compose で WordPress + WooCommerce + プラグインが一発で立ち�
 ## Prerequisites
 
 - [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/) (Docker Compose v2 含む)
+- [gawain-wordpress-plugin](https://github.com/nogeass/gawain-wordpress-plugin) が隣のディレクトリにクローンされていること
 
 ## Quick Start
 
 ```bash
+# プラグイン本体を隣にクローン (まだなければ)
+git clone https://github.com/nogeass/gawain-wordpress-plugin.git
+
 git clone https://github.com/nogeass/gawain-sample-wordpress.git
 cd gawain-sample-wordpress
 
@@ -64,13 +68,13 @@ docker compose run --rm wpcli wp plugin list
 ## Structure
 
 ```
-.
-├── docker-compose.yml        # WordPress + MySQL + WP-CLI
-├── setup.sh                  # 初回セットアップスクリプト (WP-CLI)
-├── plugins/
-│   └── gawain-ai-video/      # Gawain AI Video プラグイン
-├── .env.example              # 環境変数テンプレート
-└── README.md
+../
+├── gawain-wordpress-plugin/  # プラグイン本体 (別リポ、docker-compose でマウント)
+└── gawain-sample-wordpress/  # ← このリポジトリ
+    ├── docker-compose.yml    # WordPress + MySQL + WP-CLI
+    ├── setup.sh              # 初回セットアップスクリプト (WP-CLI)
+    ├── .env.example          # 環境変数テンプレート
+    └── README.md
 ```
 
 ## License
