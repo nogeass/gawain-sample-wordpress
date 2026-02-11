@@ -55,9 +55,9 @@ if [ "$(wp post list --post_type=product --format=count 2>/dev/null)" = "0" ]; t
     --user=admin 2>/dev/null || true
 fi
 
-# Set permalink structure (required for WooCommerce)
+# Set permalink structure (required for WooCommerce and REST API)
 wp rewrite structure '/%postname%/' 2>/dev/null || true
-wp rewrite flush 2>/dev/null || true
+wp rewrite flush --hard 2>/dev/null || true
 
 echo ""
 echo "============================================"
